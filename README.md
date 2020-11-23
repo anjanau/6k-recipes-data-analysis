@@ -87,7 +87,7 @@ We can clearly see that the most prominent elements in the word cloud, e.g. coco
 1. Filtering based on ingredient + cooking time (e.g. onion/variation of onion/shallots + 30 min cooking time)
 If we load the data as a pandas dataframe, it can be accessed by checking if the ingredient list has the word 'onion' or 'shallot' along with a condition on cooktime, for e.g.:
 ```
-df[( df['TranslatedIngredients'].str.contains('onion') | df['IngredientCommaSep'].str.contains('shallot') ) & ( df['CookTimeInMins'] == 30 )]
+df[( df['TranslatedIngredients'].str.contains('onion') | df['TranslatedIngredients'].str.contains('shallot') ) & ( df['CookTimeInMins'] == 30 )]
 ```
 2. How do you find similar dishes in the dataset, and how do you measure degree of similarity/dissimilarity?
 
@@ -97,7 +97,7 @@ df[( df['TranslatedIngredients'].str.contains('onion') | df['IngredientCommaSep'
  - Loading the dataset as a pandas dataframe, we can filter the data on Diet='Gluten Free' and and Course='Dessert' to filter dishes that are gluten free and sweet. 
 
 ## More ideas for this dataset:
-- Word2vec fine-tuned on this dataset (ingredient2vec) to find similar ingredients (ingredients which have high cosine similarity) 
+- Word2Vec fine-tuned on this dataset (ingredient2vec) to find similar ingredients (ingredients which have high cosine similarity) 
 which could be used to recommend substitute ingredients - an additional check from the dataset if it is vegan would make it a vegan substitute recommendation 
 (e.g. chicken can be substituted with tofu/paneer) 
 - Another high level idea is that we could train a recipe generator for this dataset (maybe an LSTM), trained to predict the recipe given the ingredients. Ideally with enough data, it should be able to predice new recipes given new combinations of ingredients which could be a useful tool for chefs to come up with new ideas. We can also tweak this model to perform style transfer over different cuisines (generating recipes based on the cuisine) with the same ingredients, by adding the cuisine as another input along with the ingredient while training the model. 
