@@ -88,14 +88,8 @@ Karnataka:
 If we load the data as a pandas dataframe, it can be accessed by checking if the ingredient list has the word 'onion' or 'shallot' along with a condition on cooktime, for e.g.:
 ```df[( df['TranslatedIngredients'].str.contains('onion') | df['IngredientCommaSep'].str.contains('shallot') ) & ( df['CookTimeInMins'] == 30 )]```
 2. How do you find similar dishes in the dataset, and how do you measure degree of similarity/dissimilarity?
-
-One simple way we can measure similarity is to preprocess the translated ingredients to distill only the ingredient names (as shown in the jupyter notebook in this repository),
- and use jaccard similarity on ingredients (intersection over union) to predict the similarity. However, this would weigh all ingredients equally (e.g. salt), which would not make
- it a good measure. To weigh the ingredients based on their interestingness, we can calculate inverse document frequency (idf) weights of each ingredient, where a document is a 
- row (dish) in the dataset which contains the ingredients as its content. Jaccard similarity multiplied by the idf of the ingredient would be a better measure of similarity of two dishes.
- But this method does not take into consideration similar ingredients with different names (onions/shallots) - averaging Word2Vec embeddings of the ingredients and calculating cosine similarity
- could be another way to calculate similarity between dishes.
-
+ - One simple way we can measure similarity is to preprocess the translated ingredients to distill only the ingredient names (as shown in the jupyter notebook in this repository), and use jaccard similarity on ingredients (intersection over union) to predict the similarity. However, this would weigh all ingredients equally (e.g. salt), which would not make it a good measure. To weigh the ingredients based on their interestingness, we can calculate inverse document frequency (idf) weights of each ingredient, where a document is a row (dish) in the dataset which contains the ingredients as its content. Jaccard similarity multiplied by the idf of the ingredient would be a better measure of similarity of two dishes.
+ - But this method does not take into consideration similar ingredients with different names (onions/shallots) - averaging Word2Vec embeddings of the ingredients and calculating cosine similarity could be another way to calculate similarity between dishes.
 3. How would you recommend a gluten free sweet dish from this dataset?
 Loading the dataset as a pandas dataframe, we can filter the data on Diet='Gluten Free' and and Course='Dessert' to filter dishes that are gluten free and sweet. 
 
